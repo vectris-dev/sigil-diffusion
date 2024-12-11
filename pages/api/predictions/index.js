@@ -16,19 +16,13 @@ const WEBHOOK_HOST = process.env.VERCEL_URL
 export default async function handler(req) {
   const input = await getObjectFromRequestBodyStream(req.body);
 
-  // Destructure to extract replicate_api_token and keep the rest of the properties in input
-  const { replicate_api_token, ...restInput } = input;
-
   const replicate = new Replicate({
-    auth: replicate_api_token,
+    auth: process.env.REPLICATE_API_TOKEN,
     userAgent: `${packageData.name}/${packageData.version}`,
   });
 
-
-  // https://replicate.com/jagilley/controlnet-scribble/versions
   const prediction = await replicate.predictions.create({
-    version:
-      "435061a1b5a4c1e26740464bf786efdfa9cb3a3ac488595a2de23e143fdb0117",
+    version: "435061a1b5a4c1e26740464bf786efdfa9cb3a3ac488595a2de23e143fdb0117",
     input,
     webhook: `${WEBHOOK_HOST}/api/replicate-webhook`,
     webhook_events_filter: ["start", "completed"],
@@ -43,9 +37,4 @@ export default async function handler(req) {
 
 export const config = {
   runtime: "edge",
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb",
-    },
-  },
 };
