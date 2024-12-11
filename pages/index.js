@@ -1,7 +1,7 @@
 import Canvas from "components/canvas";
 import PromptForm from "components/prompt-form";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Predictions from "components/predictions";
 import Error from "components/error";
 import uploadFile from "lib/upload";
