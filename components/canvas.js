@@ -49,6 +49,11 @@ export default function Canvas({
     canvasRef.current.resetCanvas();
   };
 
+  const exportPaths = async () => {
+    const paths = await canvasRef.current.exportPaths();
+    console.log(JSON.stringify(paths, null, 2));
+  };
+
   return (
     <div className="relative">
       {scribbleExists || (
@@ -77,6 +82,9 @@ export default function Canvas({
           <button className="lil-button" onClick={reset}>
             <TrashIcon className="icon" />
             Clear
+          </button>
+          <button className="lil-button" onClick={exportPaths}>
+            Export
           </button>
         </div>
       )}
