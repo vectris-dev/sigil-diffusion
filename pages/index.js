@@ -5,15 +5,12 @@ import { useState } from "react";
 import Predictions from "components/predictions";
 import Error from "components/error";
 import uploadFile from "lib/upload";
-import naughtyWords from "naughty-words";
 import Script from "next/script";
 import seeds from "lib/seeds";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
 
-const HOST = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export default function Home() {
   const [error, setError] = useState(null);
@@ -30,10 +27,7 @@ export default function Home() {
 
     setSubmissionCount(submissionCount + 1);
 
-    const prompt = e.target.prompt.value
-      .split(/\s+/)
-      .map((word) => (naughtyWords.en.includes(word) ? "something" : word))
-      .join(" ");
+    const prompt = e.target.prompt.value;
 
     setError(null);
     setIsProcessing(true);
@@ -43,7 +37,7 @@ export default function Home() {
     const body = {
       prompt,
       image: fileUrl,
-      structure: "scribble"
+      structure: "scribble",
     };
 
     const response = await fetch("/api/predictions", {
@@ -65,10 +59,7 @@ export default function Home() {
       return;
     }
 
-    while (
-      prediction.status !== "succeeded" &&
-      prediction.status !== "failed"
-    ) {
+    while (prediction.status !== "succeeded" && prediction.status !== "failed") {
       await sleep(500);
       const response = await fetch("/api/predictions/" + prediction.id);
       prediction = await response.json();
@@ -92,46 +83,24 @@ export default function Home() {
         <meta name="description" content={pkg.appMetaDescription} />
         <meta property="og:title" content={pkg.appName} />
         <meta property="og:description" content={pkg.appMetaDescription} />
-        <meta
-          property="og:image"
-          content={`${HOST}/og-b7xwc4g4wrdrtneilxnbngzvti.jpg`}
-        />
+        <meta property="og:image" content={`${HOST}/og-b7xwc4g4wrdrtneilxnbngzvti.jpg`} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 ">
         <div className="container max-w-[512px] mx-auto">
           <hgroup>
-            <h1 className="text-center text-5xl font-bold m-4">
-              {pkg.appName}
-            </h1>
-            <p className="text-center text-xl opacity-60 m-4">
-              {pkg.appSubtitle}
-            </p>
+            <h1 className="text-center text-5xl font-bold m-4">{pkg.appName}</h1>
           </hgroup>
 
-          <Canvas
-            startingPaths={seed.paths}
-            onScribble={setScribble}
-            scribbleExists={scribbleExists}
-            setScribbleExists={setScribbleExists}
-          />
+          <Canvas startingPaths={seed.paths} onScribble={setScribble} scribbleExists={scribbleExists} setScribbleExists={setScribbleExists} />
 
-          <PromptForm
-            initialPrompt={initialPrompt}
-            onSubmit={handleSubmit}
-            isProcessing={isProcessing}
-            scribbleExists={scribbleExists}
-          />
+          <PromptForm initialPrompt={initialPrompt} onSubmit={handleSubmit} isProcessing={isProcessing} scribbleExists={scribbleExists} />
 
           <Error error={error} />
         </div>
 
-        <Predictions
-          predictions={predictions}
-          isProcessing={isProcessing}
-          submissionCount={submissionCount}
-        />
+        <Predictions predictions={predictions} isProcessing={isProcessing} submissionCount={submissionCount} />
       </main>
 
       <Script src="https://js.bytescale.com/upload-js-full/v1" />
