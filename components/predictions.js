@@ -3,6 +3,7 @@ import { Copy as CopyIcon, PlusCircle as PlusCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import Loader from "components/loader";
+import { extractIntention } from "lib/intention";
 
 export default function Predictions({ predictions, submissionCount }) {
   const scrollRef = useRef(null);
@@ -83,7 +84,7 @@ export function Prediction({ prediction, showLinkToNewSigil = false }) {
         </div>
       </div>
       <div className="text-center px-4 opacity-60 text-xl">
-        &ldquo;{prediction.input.prompt}&rdquo;
+        &ldquo;{extractIntention(prediction.input.prompt)}&rdquo;
       </div>
       <div className="text-center py-2">
         <button className="lil-button" onClick={copyLink}>
