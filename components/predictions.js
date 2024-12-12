@@ -42,13 +42,13 @@ export default function Predictions({ predictions, submissionCount }) {
   );
 }
 
-export function Prediction({ prediction, showLinkToNewScribble = false }) {
+export function Prediction({ prediction, showLinkToNewSigil = false }) {
   const [linkCopied, setLinkCopied] = useState(false);
-
+  
   const copyLink = () => {
     const url =
       window.location.origin +
-      "/scribbles/" +
+      "/sigils/" +
       (prediction.uuid || prediction.id); // if the prediction is from the Replicate API it'll have `id`. If it's from the SQL database, it'll have `uuid`
     copy(url);
     setLinkCopied(true);
@@ -91,11 +91,11 @@ export function Prediction({ prediction, showLinkToNewScribble = false }) {
           {linkCopied ? "Copied!" : "Copy link"}
         </button>
 
-        {showLinkToNewScribble && (
+        {showLinkToNewSigil && (
           <Link href="/">
             <button className="lil-button" onClick={copyLink}>
               <PlusCircleIcon className="icon" />
-              Create a new scribble
+              Create a new sigil
             </button>
           </Link>
         )}

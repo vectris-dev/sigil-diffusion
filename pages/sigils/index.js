@@ -3,7 +3,7 @@ import Head from "next/head";
 import pkg from "../../package.json";
 import { getRecentPredictions } from "lib/db";
 
-export default function RecentScribbles({ predictions }) {
+export default function RecentSigils({ predictions }) {
   return (
     <div>
       <Head>

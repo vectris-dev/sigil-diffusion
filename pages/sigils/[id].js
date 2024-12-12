@@ -2,7 +2,7 @@ import { Prediction } from "components/predictions";
 import Head from "next/head";
 import pkg from "../../package.json";
 
-export default function Scribble({ prediction, baseUrl }) {
+export default function Sigil({ prediction, baseUrl }) {
   return (
     <div>
       <Head>
@@ -19,7 +19,7 @@ export default function Scribble({ prediction, baseUrl }) {
         />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5">
-        <Prediction prediction={prediction} showLinkToNewScribble={true} />
+        <Prediction prediction={prediction} showLinkToNewSigil={true} />
       </main>
     </div>
   );

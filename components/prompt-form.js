@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 export default function PromptForm({
   initialPrompt,
   onSubmit,
-  scribbleExists,
+  sigilExists,
 }) {
   const [prompt, setPrompt] = useState(initialPrompt);
 
-  const disabled = !(scribbleExists && prompt?.length > 0);
+  const disabled = !(sigilExists && prompt?.length > 0);
 
   useEffect(() => {
     setPrompt(initialPrompt);
