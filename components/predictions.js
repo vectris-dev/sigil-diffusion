@@ -50,9 +50,28 @@ export function Prediction({ prediction, showLinkToNewSigil = false }) {
     const url =
       window.location.origin +
       "/sigils/" +
-      (prediction.uuid || prediction.id); // if the prediction is from the Replicate API it'll have `id`. If it's from the SQL database, it'll have `uuid`
+      (prediction.uuid || prediction.id);
     copy(url);
     setLinkCopied(true);
+  };
+
+  const downloadSigil = async () => {
+    if (prediction.output?.length) {
+      try {
+        const response = await fetch(prediction.output[prediction.output.length - 1]);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `sigil-${extractIntention(prediction.input.prompt)}-${prediction.uuid || prediction.id}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Error downloading image:', error);
+      }
+    }
   };
 
   // Clear the "Copied!" message after 4 seconds
@@ -90,6 +109,15 @@ export function Prediction({ prediction, showLinkToNewSigil = false }) {
         <button className="lil-button" onClick={copyLink}>
           <CopyIcon className="icon" />
           {linkCopied ? "Copied!" : "Copy link"}
+        </button>
+
+        <button className="lil-button" onClick={downloadSigil}>
+          <svg className="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Download
         </button>
 
         {showLinkToNewSigil && (

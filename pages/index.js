@@ -109,7 +109,7 @@ export default function Home() {
                 disabled={!sigilExists} 
                 onClick={handleSubmit}
               >
-                Submit
+                Charge
               </button>
             </div>
           )}
