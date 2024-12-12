@@ -9,7 +9,7 @@ import Script from "next/script";
 import seeds from "lib/seeds";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
-
+import SigilForge from "components/sigilForge";
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export default function Home() {
@@ -92,7 +92,8 @@ export default function Home() {
           <hgroup>
             <h1 className="text-center text-5xl font-bold m-4 mb-10">{pkg.appName}</h1>
           </hgroup>
-          
+          <SigilForge />
+
           <div className="mb-10"> 
             <PromptForm initialPrompt={initialPrompt} onSubmit={handleSubmit} isProcessing={isProcessing} scribbleExists={scribbleExists} />
           </div>
