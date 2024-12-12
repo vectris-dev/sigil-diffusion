@@ -1,7 +1,7 @@
 {
-  "name": "sigil-diffusion",
+  "name": "sigil-forge",
   "description": "Turn your sketch into a refined image using AI",
-  "appName": "Sigil Diffusion",
+  "appName": "Sigil Forge",
   "appSubtitle": "Turn your sketch into a refined image using AI",
   "appMetaDescription": "Turn your sketch into a refined image using AI",
   "version": "1.0.0",
@@ -23,6 +23,7 @@
     "@vercel/analytics": "^0.1.10",
     "@vercel/og": "^0.1.0",
     "copy-to-clipboard": "^3.3.3",
+    "framer-motion": "^11.14.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.88.0",
     "naughty-words": "^1.2.0",
@@ -36,6 +37,8 @@
     "upload-js-full": "^1.22.0"
   },
   "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.1",
     "autoprefixer": "^10.4.8",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",

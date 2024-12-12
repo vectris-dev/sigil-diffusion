@@ -1,6 +1,5 @@
 import copy from "copy-to-clipboard";
 import { Copy as CopyIcon, PlusCircle as PlusCircleIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import Loader from "components/loader";
@@ -68,20 +67,13 @@ export function Prediction({ prediction, showLinkToNewScribble = false }) {
 
   return (
     <div className="mt-6 mb-12">
-      <div className="shadow-lg border my-5 p-5 bg-white flex">
-        <div className="w-1/2 aspect-square relative border">
-          <img
-            src={prediction.input.image}
-            alt="input scribble"
-            className="w-full aspect-square"
-          />
-        </div>
-        <div className="w-1/2 aspect-square relative">
+      <div className="shadow-lg border my-5 p-5 bg-white flex justify-center">
+        <div className="aspect-square relative w-full max-w-[512px]">
           {prediction.output?.length ? (
             <img
               src={prediction.output[prediction.output.length - 1]}
               alt="output image"
-              className="w-full aspect-square"
+              className="w-full aspect-square object-contain"
             />
           ) : (
             <div className="grid h-full place-items-center">

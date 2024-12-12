@@ -90,12 +90,14 @@ export default function Home() {
       <main className="container max-w-[1024px] mx-auto p-5 ">
         <div className="container max-w-[512px] mx-auto">
           <hgroup>
-            <h1 className="text-center text-5xl font-bold m-4">{pkg.appName}</h1>
+            <h1 className="text-center text-5xl font-bold m-4 mb-10">{pkg.appName}</h1>
           </hgroup>
+          
+          <div className="mb-10"> 
+            <PromptForm initialPrompt={initialPrompt} onSubmit={handleSubmit} isProcessing={isProcessing} scribbleExists={scribbleExists} />
+          </div>
 
           <Canvas startingPaths={seed.paths} onScribble={setScribble} scribbleExists={scribbleExists} setScribbleExists={setScribbleExists} />
-
-          <PromptForm initialPrompt={initialPrompt} onSubmit={handleSubmit} isProcessing={isProcessing} scribbleExists={scribbleExists} />
 
           <Error error={error} />
         </div>
