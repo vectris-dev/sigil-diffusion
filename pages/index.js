@@ -1,5 +1,4 @@
 import Canvas from "components/canvas";
-import PromptForm from "components/prompt-form";
 import Head from "next/head";
 import { useState } from "react";
 import Predictions from "components/predictions";
@@ -13,26 +12,28 @@ import SigilForge from "components/sigilForge";
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export default function Home() {
-  const [error, setError] = useState(null);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [predictions, setPredictions] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
-  const [scribbleExists, setScribbleExists] = useState(false);
+  const [sigilExists, setSigilExists] = useState(false);
   const [seed] = useState(seeds[Math.floor(Math.random() * seeds.length)]);
-  const [initialPrompt] = useState(seed.prompt);
-  const [scribble, setScribble] = useState(null);
+  const [sigil, setSigil] = useState(null);
+  const [intention, setIntention] = useState('I am confident and fearless');
+  const [intentionReady, setIntentionReady] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setSubmissionCount(submissionCount + 1);
 
-    const prompt = e.target.prompt.value;
+    let prompt = `A glowing, mystical sigil with intricate patterns, radiating magical energy, symbolizing the intention: "${intention}". The sigil is surrounded by an aura of light, with ethereal and otherworldly effects, evoking a sense of immense power and focus.`;
+    console.log(prompt);
 
     setError(null);
     setIsProcessing(true);
 
-    const fileUrl = await uploadFile(scribble);
+    const fileUrl = await uploadFile(sigil);
 
     const body = {
       prompt,
@@ -92,13 +93,26 @@ export default function Home() {
           <hgroup>
             <h1 className="text-center text-5xl font-bold m-4 mb-10">{pkg.appName}</h1>
           </hgroup>
-          <SigilForge />
+          <SigilForge intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
 
-          <div className="mb-10"> 
-            <PromptForm initialPrompt={initialPrompt} onSubmit={handleSubmit} isProcessing={isProcessing} scribbleExists={scribbleExists} />
-          </div>
+          {intentionReady && (
+            <div className="animate-in fade-in duration-700">
+              <Canvas startingPaths={seed.paths} onSigil={setSigil} sigilExists={sigilExists} setSigilExists={setSigilExists} />
 
-          <Canvas startingPaths={seed.paths} onScribble={setScribble} scribbleExists={scribbleExists} setScribbleExists={setScribbleExists} />
+              <button 
+                className={`
+                  bg-black text-white rounded-md text-small px-5 py-3
+                  mx-auto block
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                  transition-opacity duration-200 mt-6
+                `} 
+                disabled={!sigilExists} 
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          )}
 
           <Error error={error} />
         </div>

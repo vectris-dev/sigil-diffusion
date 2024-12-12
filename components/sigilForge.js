@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useProcessText } from './useProcessText'
 import { AnimatedLetter } from './animatedLetter'
 
-export default function Sigilforge() {
-  const [intention, setIntention] = useState('')
+export default function Sigilforge({intention, setIntention, onIntentionReady}) {
   const [isAnimating, setIsAnimating] = useState(false)
   const [showOutput, setShowOutput] = useState(false)
   const { processedText, removedIndices } = useProcessText(intention)
@@ -17,7 +16,7 @@ export default function Sigilforge() {
     setIntention(trimmedIntention)
     setIsAnimating(true)
     setShowOutput(true)
-    setTimeout(() => setIsAnimating(false), trimmedIntention.length * 100 + 1000)
+    setTimeout(() => {onIntentionReady(true); setIsAnimating(false)}, trimmedIntention.length * 100 + 1000)
   }
 
   return (
@@ -29,6 +28,11 @@ export default function Sigilforge() {
           onChange={(e) => setIntention(e.target.value)}
           placeholder="Enter your intention"
           className="w-full px-4 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          autoFocus
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
         <button
           type="submit"

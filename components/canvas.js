@@ -4,27 +4,20 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 
 import { Undo as UndoIcon, Trash as TrashIcon } from "lucide-react";
 
-export default function Canvas({
-  startingPaths,
-  onScribble,
-  scribbleExists,
-  setScribbleExists,
-}) {
+export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilExists }) {
   const canvasRef = React.useRef(null);
 
   useEffect(() => {
     // Hack to work around Firfox bug in react-sketch-canvas
     // https://github.com/vinothpandian/react-sketch-canvas/issues/54
-    document
-      .querySelector("#react-sketch-canvas__stroke-group-0")
-      ?.removeAttribute("mask");
+    document.querySelector("#react-sketch-canvas__stroke-group-0")?.removeAttribute("mask");
 
-    loadStartingPaths();
+    // loadStartingPaths();
   }, []);
 
   async function loadStartingPaths() {
     await canvasRef.current.loadPaths(startingPaths);
-    setScribbleExists(true);
+    setSigilExists(true);
     onChange();
   }
 
@@ -34,10 +27,10 @@ export default function Canvas({
 
     if (!paths.length) return;
 
-    setScribbleExists(true);
+    setSigilExists(true);
 
     const data = await canvasRef.current.exportImage("png");
-    onScribble(data);
+    onSigil(data);
   };
 
   const undo = () => {
@@ -45,7 +38,7 @@ export default function Canvas({
   };
 
   const reset = () => {
-    setScribbleExists(false);
+    setSigilExists(false);
     canvasRef.current.resetCanvas();
   };
 
@@ -56,7 +49,8 @@ export default function Canvas({
 
   return (
     <div className="relative">
-      {scribbleExists || (
+      <p className="text-center text-2xl font-bold mb-4">Now, draw your sigil</p>
+      {sigilExists || (
         <div>
           <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
             <span className="opacity-40">Draw your sigil</span>
@@ -64,16 +58,9 @@ export default function Canvas({
         </div>
       )}
 
-      <ReactSketchCanvas
-        ref={canvasRef}
-        className="w-full aspect-square border-none cursor-crosshair"
-        strokeWidth={4}
-        strokeColor="black"
-        onChange={onChange}
-        withTimestamp={true}
-      />
+      <ReactSketchCanvas ref={canvasRef} className="w-full aspect-square border-none cursor-crosshair" strokeWidth={4} strokeColor="black" onChange={onChange} withTimestamp={true} />
 
-      {scribbleExists && (
+      {sigilExists && (
         <div className="animate-in fade-in duration-700 text-left">
           <button className="lil-button" onClick={undo}>
             <UndoIcon className="icon" />
