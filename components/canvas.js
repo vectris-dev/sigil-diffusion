@@ -52,7 +52,7 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
       {sigilExists || (
         <div>
           <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
-            <span className="opacity-40">Draw your sigil</span>
+            <span className="opacity-40">Now, draw your sigil using the letters above</span>
           </div>
         </div>
       )}
