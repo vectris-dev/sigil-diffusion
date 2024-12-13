@@ -9,6 +9,7 @@ import seeds from "lib/seeds";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
 import IntentionForm from "components/intention-form";
+import { PrimaryButton } from "components/PrimaryButton";
 
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
@@ -96,18 +97,12 @@ export default function Home() {
             <div className="animate-in fade-in duration-700">
               <Canvas startingPaths={seed.paths} onSigil={setSigil} sigilExists={sigilExists} setSigilExists={setSigilExists} />
 
-              <button
-                className={`
-                  rounded-md text-small px-5 py-3
-                  mx-auto block
-                  disabled:opacity-50 disabled:cursor-not-allowed
-                  transition-opacity duration-200 mt-6
-                `}
+              <PrimaryButton
                 disabled={!sigilExists}
                 onClick={handleSubmit}
               >
                 Charge
-              </button>
+              </PrimaryButton>
             </div>
           )}
 

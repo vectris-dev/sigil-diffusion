@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useProcessText } from "./useProcessText";
 import { AnimatedLetter } from "./animatedLetter";
+import { PrimaryButton } from "./PrimaryButton";
 
 export default function IntentionForm({ intention, setIntention, onIntentionReady }) {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -25,6 +26,7 @@ export default function IntentionForm({ intention, setIntention, onIntentionRead
   return (
     <div className={`flex flex-col items-center justify-center p-4 transition-all duration-700`}>
       <form onSubmit={handleSubmit} className="w-full max-w-md mb-8">
+        <div className="text-center text-xl mb-6">Write your intention</div>
         <input
           type="text"
           value={intention}
@@ -37,17 +39,9 @@ export default function IntentionForm({ intention, setIntention, onIntentionRead
           autoCapitalize="off"
           spellCheck="false"
         />
-        <button
-          type="submit"
-          className={`
-          rounded-md text-small px-5 py-3
-            mx-auto block
-            disabled:opacity-50 disabled:cursor-not-allowed
-            transition-opacity duration-200 mt-6
-          `}
-        >
+        <PrimaryButton type="submit">
           Prepare
-        </button>
+        </PrimaryButton>
       </form>
       <AnimatePresence>
         {showOutput && (
