@@ -2,35 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-background text-primary;
+}
+
 input {
   @apply border;
   @apply border-solid;
-  @apply border-gray-300;
-  /* @apply rounded-md; */
+  @apply border-primary;
+  @apply bg-background;
+  @apply text-primary;
   @apply px-4;
   @apply py-2;
 }
 
 .border-hairline {
-  @apply border border-black border-opacity-10;
+  @apply border border-primary border-opacity-50;
 }
 
 .lil-button {
   @apply inline-block;
   @apply text-sm;
-  @apply text-gray-500;
+  @apply text-secondary;
   @apply rounded-md;
   @apply py-2;
   @apply mx-3;
+  @apply hover:text-primary;
+  @apply transition-colors;
 }
 
 .lil-text {
   @apply text-sm;
-  @apply text-gray-500;
+  @apply text-secondary;
 }
 
 .lil-text a {
-  @apply text-gray-800;
+  @apply text-primary;
   @apply underline;
 }
 
@@ -44,11 +51,11 @@ input {
 .prose {
   @apply mt-8;
   @apply text-lg;
-  @apply text-gray-500;
+  @apply text-secondary;
   @apply leading-7;
 }
 
 .prose a {
-  @apply text-gray-600;
+  @apply text-primary;
   @apply underline;
 }

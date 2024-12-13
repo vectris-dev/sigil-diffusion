@@ -87,7 +87,7 @@ export function Prediction({ prediction, showLinkToNewSigil = false }) {
 
   return (
     <div className="mt-6 mb-12">
-      <div className="shadow-lg border my-5 p-5 bg-white flex justify-center">
+      <div className="my-5 p-5 flex justify-center">
         <div className="aspect-square relative w-full max-w-[512px]">
           {prediction.output?.length ? (
             <img

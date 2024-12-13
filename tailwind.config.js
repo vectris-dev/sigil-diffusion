@@ -9,11 +9,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "rgb(255, 247, 145)",
-        black: colors.black,
-        white: colors.white,
-        shade: "rgba(0, 0, 0, 0.45)",
-        bgshade: "rgba(0, 0, 0, 0.05)",
+        brand: "#ff0000",
+        primary: "#ff0000",
+        secondary: "#800000",
+        background: "#000000",
+        shade: "rgba(255, 0, 0, 0.45)",
+        bgshade: "rgba(255, 0, 0, 0.05)",
       },
       cursor: {
         crosshair:

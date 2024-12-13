@@ -8,7 +8,7 @@ import Script from "next/script";
 import seeds from "lib/seeds";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
-import SigilForge from "components/sigilForge";
+import IntentionForm from "components/intention-form";
 
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [sigilExists, setSigilExists] = useState(false);
   const [seed] = useState(seeds[Math.floor(Math.random() * seeds.length)]);
   const [sigil, setSigil] = useState(null);
-  const [intention, setIntention] = useState('I am focused and productive');
+  const [intention, setIntention] = useState("I am focused and productive");
   const [intentionReady, setIntentionReady] = useState(false);
   const [error, setError] = useState(null);
 
@@ -90,21 +90,20 @@ export default function Home() {
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 ">
         <div className="container max-w-[512px] mx-auto">
-
-          <SigilForge intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
+          <IntentionForm intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
 
           {intentionReady && (
             <div className="animate-in fade-in duration-700">
               <Canvas startingPaths={seed.paths} onSigil={setSigil} sigilExists={sigilExists} setSigilExists={setSigilExists} />
 
-              <button 
+              <button
                 className={`
-                  bg-black text-white rounded-md text-small px-5 py-3
+                  rounded-md text-small px-5 py-3
                   mx-auto block
                   disabled:opacity-50 disabled:cursor-not-allowed
                   transition-opacity duration-200 mt-6
-                `} 
-                disabled={!sigilExists} 
+                `}
+                disabled={!sigilExists}
                 onClick={handleSubmit}
               >
                 Charge
