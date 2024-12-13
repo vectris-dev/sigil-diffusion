@@ -6,19 +6,31 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        brand: "#ff0000",
-        primary: "#ff0000",
-        secondary: "#800000",
-        background: "#000000",
-        shade: "rgba(255, 0, 0, 0.45)",
-        bgshade: "rgba(255, 0, 0, 0.05)",
-      },
-      cursor: {
-        crosshair:
-          "url(https://user-images.githubusercontent.com/14149230/219877313-3eb493fa-4f48-456d-af34-e74ce854befb.png) 0 25, crosshair",
+        brand: colors.black,
+        primary: {
+          light: colors.black,
+          dark: colors.white,
+        },
+        secondary: {
+          light: colors.gray[600],
+          dark: colors.gray[400],
+        },
+        background: {
+          light: colors.white,
+          dark: colors.gray[900],
+        },
+        shade: {
+          light: "rgba(0, 0, 0, 0.45)",
+          dark: "rgba(255, 255, 255, 0.45)",
+        },
+        bgshade: {
+          light: "rgba(0, 0, 0, 0.05)",
+          dark: "rgba(255, 255, 255, 0.05)",
+        },
       },
     },
   },

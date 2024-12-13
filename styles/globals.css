@@ -3,41 +3,41 @@
 @tailwind utilities;
 
 body {
-  @apply bg-background text-primary;
+  @apply bg-background-light dark:bg-background-dark text-primary-light dark:text-primary-dark;
 }
 
 input {
   @apply border;
   @apply border-solid;
-  @apply border-primary;
-  @apply bg-background;
-  @apply text-primary;
+  @apply border-primary-light dark:border-primary-dark;
+  @apply bg-background-light dark:bg-background-dark;
+  @apply text-primary-light dark:text-primary-dark;
   @apply px-4;
   @apply py-2;
 }
 
 .border-hairline {
-  @apply border border-primary border-opacity-50;
+  @apply border border-primary-light dark:border-primary-dark border-opacity-50;
 }
 
 .lil-button {
   @apply inline-block;
   @apply text-sm;
-  @apply text-secondary;
+  @apply text-secondary-light dark:text-secondary-dark;
   @apply rounded-md;
   @apply py-2;
   @apply mx-3;
-  @apply hover:text-primary;
+  @apply hover:text-primary-light dark:hover:text-primary-dark;
   @apply transition-colors;
 }
 
 .lil-text {
   @apply text-sm;
-  @apply text-secondary;
+  @apply text-secondary-light dark:text-secondary-dark;
 }
 
 .lil-text a {
-  @apply text-primary;
+  @apply text-primary-light dark:text-primary-dark;
   @apply underline;
 }
 
@@ -51,12 +51,12 @@ input {
 .prose {
   @apply mt-8;
   @apply text-lg;
-  @apply text-secondary;
+  @apply text-secondary-light dark:text-secondary-dark;
   @apply leading-7;
 }
 
 .prose a {
-  @apply text-primary;
+  @apply text-primary-light dark:text-primary-dark;
   @apply underline;
 }
 

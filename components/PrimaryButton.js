@@ -9,7 +9,7 @@ export function PrimaryButton({ type = "button", disabled, onClick, children }) 
         mx-auto block
         disabled:opacity-50 disabled:cursor-not-allowed
         transition-opacity duration-200 mt-6
-        bg-primary text-white
+        bg-primary-light dark:bg-primary-dark text-background-light dark:text-background-dark
       `}
     >
       {children}
