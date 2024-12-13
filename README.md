@@ -1,6 +1,6 @@
 # Sigil Forge
 
-Turn your intention into a powerful sigil at [sigilforge.vectris.net](https://sigilforge.vectris.net)
+Turn your intention into a powerful sigil at [sigilforge.vectris.dev](https://sigilforge.vectris.dev)
 
 ## How it works
 
