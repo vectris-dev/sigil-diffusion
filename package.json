@@ -1,9 +1,9 @@
 {
   "name": "sigil-forge",
-  "description": "Turn your sketch into a refined image using AI",
+  "description": "Turn your intention into a powerful sigil",
   "appName": "Sigil Forge",
-  "appSubtitle": "Turn your sketch into a refined image using AI",
-  "appMetaDescription": "Turn your sketch into a refined image using AI",
+  "appSubtitle": "Turn your intention into a powerful sigil",
+  "appMetaDescription": "Turn your intention into a powerful sigil",
   "version": "1.0.0",
   "private": true,
   "scripts": {
