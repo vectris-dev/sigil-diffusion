@@ -59,3 +59,16 @@ input {
   @apply text-primary;
   @apply underline;
 }
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-700 {
+  transition-duration: 700ms;
+}

@@ -88,8 +88,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
-      <main className="container max-w-[1024px] mx-auto p-5 ">
-        <div className="container max-w-[512px] mx-auto">
+      <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
+        <div className={`container max-w-[512px] mx-auto transition-all duration-700 ${intentionReady ? 'mt-0' : 'mt-[30vh]'}`}>
           <IntentionForm intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
 
           {intentionReady && (

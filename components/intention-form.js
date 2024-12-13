@@ -23,7 +23,7 @@ export default function IntentionForm({ intention, setIntention, onIntentionRead
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
+    <div className={`flex flex-col items-center justify-center p-4 transition-all duration-700`}>
       <form onSubmit={handleSubmit} className="w-full max-w-md mb-8">
         <input
           type="text"
