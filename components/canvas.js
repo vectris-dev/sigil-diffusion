@@ -4,7 +4,7 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 
 import { Undo as UndoIcon, Trash as TrashIcon } from "lucide-react";
 
-export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilExists }) {
+export default function Canvas({ onDrawing, drawingExists, setDrawingExists }) {
   const canvasRef = React.useRef(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
 
   async function loadStartingPaths() {
     await canvasRef.current.loadPaths(startingPaths);
-    setSigilExists(true);
+    setDrawingExists(true);
     onChange();
   }
 
@@ -27,10 +27,10 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
 
     if (!paths.length) return;
 
-    setSigilExists(true);
+    setDrawingExists(true);
 
     const data = await canvasRef.current.exportImage("png");
-    onSigil(data);
+    onDrawing(data);
   };
 
   const undo = () => {
@@ -38,7 +38,7 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
   };
 
   const reset = () => {
-    setSigilExists(false);
+    setDrawingExists(false);
     canvasRef.current.resetCanvas();
   };
 
@@ -49,7 +49,7 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
 
   return (
     <div className="relative">
-      {sigilExists || (
+      {drawingExists || (
         <div>
           <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
             <span className="opacity-40 text-background-dark">Now, draw your sigil using the letters above</span>
@@ -59,7 +59,7 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
 
       <ReactSketchCanvas ref={canvasRef} className="w-full aspect-square border-none cursor-crosshair" strokeWidth={4} strokeColor="black" onChange={onChange} withTimestamp={true} />
 
-      {sigilExists && (
+      {drawingExists && (
         <div className="animate-in fade-in duration-700 text-left">
           <button className="lil-button" onClick={undo}>
             <UndoIcon className="icon" />

@@ -6,7 +6,7 @@ import { useProcessText } from "./useProcessText";
 import { AnimatedLetter } from "./animatedLetter";
 import { PrimaryButton } from "./PrimaryButton";
 
-export default function IntentionForm({ intention, setIntention, onIntentionReady }) {
+export default function IntentionForm({ intention, setIntention, onIntentionProcessed }) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showOutput, setShowOutput] = useState(false);
   const { processedText, removedIndices } = useProcessText(intention);
@@ -18,7 +18,7 @@ export default function IntentionForm({ intention, setIntention, onIntentionRead
     setIsAnimating(true);
     setShowOutput(true);
     setTimeout(() => {
-      onIntentionReady(true);
+      onIntentionProcessed(true);
       setIsAnimating(false);
     }, trimmedIntention.length * 100 + 1000);
   };
