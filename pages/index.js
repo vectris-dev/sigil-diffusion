@@ -1,6 +1,6 @@
-import Canvas from "components/canvas";
-import Head from "next/head";
 import { useState } from "react";
+import Head from "next/head";
+import Canvas from "components/canvas";
 import Predictions from "components/predictions";
 import Error from "components/error";
 import uploadFile from "lib/upload";
@@ -9,6 +9,7 @@ import seeds from "lib/seeds";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
 import SigilForge from "components/sigilForge";
+
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
   const [sigilExists, setSigilExists] = useState(false);
   const [seed] = useState(seeds[Math.floor(Math.random() * seeds.length)]);
   const [sigil, setSigil] = useState(null);
-  const [intention, setIntention] = useState('I am confident and fearless');
+  const [intention, setIntention] = useState('I am focused and productive');
   const [intentionReady, setIntentionReady] = useState(false);
   const [error, setError] = useState(null);
 
@@ -28,7 +29,6 @@ export default function Home() {
     setSubmissionCount(submissionCount + 1);
 
     let prompt = `A glowing, mystical sigil with intricate patterns, radiating magical energy, symbolizing the intention: "${intention}". The sigil is surrounded by an aura of light, with ethereal and otherworldly effects, evoking a sense of immense power and focus.`;
-    console.log(prompt);
 
     setError(null);
     setIsProcessing(true);
@@ -90,9 +90,7 @@ export default function Home() {
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 ">
         <div className="container max-w-[512px] mx-auto">
-          <hgroup>
-            <h1 className="text-center text-5xl font-bold m-4 mb-10">{pkg.appName}</h1>
-          </hgroup>
+
           <SigilForge intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
 
           {intentionReady && (
