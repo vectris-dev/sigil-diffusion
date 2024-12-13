@@ -42,17 +42,17 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
     canvasRef.current.resetCanvas();
   };
 
-  const exportPaths = async () => {
-    const paths = await canvasRef.current.exportPaths();
-    console.log(JSON.stringify(paths, null, 2));
-  };
+  // const exportPaths = async () => {
+  //   const paths = await canvasRef.current.exportPaths();
+  //   console.log(JSON.stringify(paths, null, 2));
+  // };
 
   return (
     <div className="relative">
       {sigilExists || (
         <div>
           <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
-            <span className="opacity-40">Now, draw your sigil using the letters above</span>
+            <span className="opacity-40 text-background-dark">Now, draw your sigil using the letters above</span>
           </div>
         </div>
       )}
@@ -69,9 +69,9 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
             <TrashIcon className="icon" />
             Clear
           </button>
-          <button className="lil-button" onClick={exportPaths}>
+          {/* <button className="lil-button" onClick={exportPaths}>
             Export
-          </button>
+          </button> */}
         </div>
       )}
     </div>
