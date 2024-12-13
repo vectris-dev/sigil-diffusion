@@ -1,14 +1,16 @@
-# 🖍️ Scribble Diffusion
+# 🖍 Sigil Forge
 
-Try it out at [scribblediffusion.com](https://scribblediffusion.com)
+Turn your intention into a powerful sigil at [sigilforge.vectris.net](https://sigilforge.vectris.net)
 
 ## How it works
 
 This app is powered by:
 
-🚀 [Replicate](https://replicate.com/?utm_source=project&utm_campaign=scribblediffusion), a platform for running machine learning models in the cloud.
+🚀 [Replicate](https://replicate.com/), a platform for running machine learning models in the cloud.
 
-🖍️ [ControlNet](https://replicate.com/jagilley/controlnet-scribble?utm_source=project&utm_campaign=scribblediffusion), an open-source machine learning model that generates images from text and scribbles.
+🎨 [ControlNet](https://replicate.com/jagilley/controlnet-scribble), an open-source machine learning model that generates images from text and scribbles.
+
+☁️ [Cloudinary](https://cloudinary.com/), a cloud-based image management service.
 
 ▲ [Vercel](https://vercel.com/), a platform for running web apps.
 
@@ -21,13 +23,23 @@ This app is powered by:
 ## Development
 
 1. Install a recent version of [Node.js](https://nodejs.org/)
-1. Copy your [Replicate API token](https://replicate.com/account?utm_source=project&utm_campaign=scribblediffusion) and set it in your environment:
+
+2. Set up your environment variables:
    ```
-   echo "REPLICATE_API_TOKEN=<your-token-here>" > .env.local
+   REPLICATE_API_TOKEN=<your-token-here>
+   CLOUDINARY_CLOUD_NAME=<your-cloud-name>
+   CLOUDINARY_API_KEY=<your-api-key>
+   CLOUDINARY_API_SECRET=<your-api-secret>
    ```
-1. Install dependencies and run the server:
+
+3. Install dependencies and run the server:
    ```
    npm install
    npm run dev
    ```
-1. Open [localhost:3000](http://localhost:3000) in your browser. That's it!
+
+4. Open [localhost:3000](http://localhost:3000) in your browser. That's it!
+
+## About
+
+SigilForge is a tool that helps you create and charge magical sigils. Enter your intention, and the app will help you transform it into a unique sigil by removing vowels and repeated letters. Draw your sigil using the remaining letters, and the AI will transform it into a mystical, charged version.
