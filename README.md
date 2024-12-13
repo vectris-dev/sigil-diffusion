@@ -1,4 +1,4 @@
-# 🖍 Sigil Forge
+# Sigil Forge
 
 Turn your intention into a powerful sigil at [sigilforge.vectris.net](https://sigilforge.vectris.net)
 
@@ -6,19 +6,19 @@ Turn your intention into a powerful sigil at [sigilforge.vectris.net](https://si
 
 This app is powered by:
 
-🚀 [Replicate](https://replicate.com/), a platform for running machine learning models in the cloud.
+[Replicate](https://replicate.com/), a platform for running machine learning models in the cloud.
 
-🎨 [ControlNet](https://replicate.com/jagilley/controlnet-scribble), an open-source machine learning model that generates images from text and scribbles.
+[ControlNet](https://replicate.com/jagilley/controlnet-scribble), an open-source machine learning model that generates images from text and scribbles.
 
-☁️ [Cloudinary](https://cloudinary.com/), a cloud-based image management service.
+[Cloudinary](https://cloudinary.com/), a cloud-based image management service.
 
-▲ [Vercel](https://vercel.com/), a platform for running web apps.
+[Vercel](https://vercel.com/), a platform for running web apps.
 
-⚡️ Next.js [server-side API routes](pages/api), for talking to the Replicate API.
+Next.js [server-side API routes](pages/api), for talking to the Replicate API.
 
-👀 Next.js React components, for the browser UI.
+Next.js React components, for the browser UI.
 
-🍃 [Tailwind CSS](https://tailwindcss.com/), for styles.
+[Tailwind CSS](https://tailwindcss.com/), for styles.
 
 ## Development
 
