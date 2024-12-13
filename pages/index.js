@@ -7,7 +7,6 @@ import uploadFile from "lib/upload";
 import pkg from "../package.json";
 import sleep from "lib/sleep";
 import IntentionForm from "components/intention-form";
-import { PrimaryButton } from "components/PrimaryButton";
 
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
@@ -17,7 +16,6 @@ export default function Home() {
   const [intention, setIntention] = useState("");
   const [processedIntention, setProcessedIntention] = useState("");
   const [drawing, setDrawing] = useState(null);
-  const [drawingExists, setDrawingExists] = useState(false);
   const [output, setOutput] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
@@ -84,23 +82,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
-        <div className={`container max-w-[512px] mx-auto transition-all duration-700 ${processedIntention ? "mt-0" : "mt-[30vh]"}`}>
-          <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={setProcessedIntention} />
-
-          {processedIntention && (
-            <div className="animate-in fade-in duration-700">
-              <Canvas onDrawing={setDrawing} drawingExists={drawingExists} setDrawingExists={setDrawingExists} />
-
-              <PrimaryButton disabled={!drawingExists} onClick={handleSubmit}>
-                Charge
-              </PrimaryButton>
-            </div>
-          )}
-
-          <Error error={error} />
-        </div>
-
-        {output && <Output output={output} />}
+        <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={setProcessedIntention} />
+        <Canvas onDrawing={setDrawing} onSubmit={handleSubmit} />
+        <Error error={error} />
+        <Output output={output} />
       </main>
     </>
   );

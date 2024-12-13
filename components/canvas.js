@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
-
+import PrimaryButton from "./PrimaryButton";
 import { Undo as UndoIcon, Trash as TrashIcon } from "lucide-react";
 
-export default function Canvas({ onDrawing, drawingExists, setDrawingExists }) {
+export default function Canvas({ onDrawing, onSubmit }) {
   const canvasRef = React.useRef(null);
+  const [drawingExists, setDrawingExists] = useState(false);
 
   useEffect(() => {
     // Hack to work around Firfox bug in react-sketch-canvas
@@ -74,6 +75,10 @@ export default function Canvas({ onDrawing, drawingExists, setDrawingExists }) {
           </button> */}
         </div>
       )}
+
+      <PrimaryButton disabled={!drawingExists} onClick={onSubmit}>
+        Charge
+      </PrimaryButton>
     </div>
   );
 }

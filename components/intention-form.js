@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useProcessText } from "./useProcessText";
 import { AnimatedLetter } from "./animatedLetter";
-import { PrimaryButton } from "./PrimaryButton";
+import PrimaryButton from "./PrimaryButton";
 
 export default function IntentionForm({ intention, setIntention, onIntentionProcessed }) {
   const [isAnimating, setIsAnimating] = useState(false);
