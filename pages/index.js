@@ -10,6 +10,8 @@ import pkg from "../package.json";
 import sleep from "lib/sleep";
 import IntentionForm from "components/intention-form";
 import { PrimaryButton } from "components/PrimaryButton";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { Popover } from "@headlessui/react";
 
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
@@ -90,17 +92,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
-        <div className={`container max-w-[512px] mx-auto transition-all duration-700 ${intentionReady ? 'mt-0' : 'mt-[30vh]'}`}>
+        <div className={`container max-w-[512px] mx-auto transition-all duration-700 ${intentionReady ? "mt-0" : "mt-[30vh]"}`}>
           <IntentionForm intention={intention} setIntention={setIntention} onIntentionReady={setIntentionReady} />
 
           {intentionReady && (
             <div className="animate-in fade-in duration-700">
+              <p className="text-center text-2xl font-bold mb-4 flex items-center justify-center gap-2">
+                Now, draw your sigil
+                <Popover className="relative">
+                  <Popover.Button className="focus:outline-none">
+                    <InformationCircleIcon className="h-6 w-6 text-gray-500 hover:text-gray-700" />
+                  </Popover.Button>
+                  <Popover.Panel className="absolute z-10 w-80 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-lg -right-2">
+                    <p className="text-sm text-gray-600">
+                      A sigil is a visual distillation of your intention. Begin with the letters provided, stripped of repetition and vowels, and let their
+                      shapes guide you. Combine, intertwine, and transform them into a design that resonates with your intention. There are no rules—only the flow of your creativity and the focus of
+                      your will. As you craft, infuse the symbol with meaning, allowing it to embody your purpose and energy. Your sigil is complete when it feels alive, charged with the essence of
+                      your intention.
+                    </p>
+                  </Popover.Panel>
+                </Popover>
+              </p>
+
               <Canvas startingPaths={seed.paths} onSigil={setSigil} sigilExists={sigilExists} setSigilExists={setSigilExists} />
 
-              <PrimaryButton
-                disabled={!sigilExists}
-                onClick={handleSubmit}
-              >
+              <PrimaryButton disabled={!sigilExists} onClick={handleSubmit}>
                 Charge
               </PrimaryButton>
             </div>

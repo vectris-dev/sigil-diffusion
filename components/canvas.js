@@ -49,7 +49,6 @@ export default function Canvas({ startingPaths, onSigil, sigilExists, setSigilEx
 
   return (
     <div className="relative">
-      <p className="text-center text-2xl font-bold mb-4">Now, draw your sigil</p>
       {sigilExists || (
         <div>
           <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
