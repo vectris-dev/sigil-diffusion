@@ -86,7 +86,7 @@ export default function Home() {
         <meta name="description" content={pkg.appMetaDescription} />
         <meta property="og:title" content={pkg.appName} />
         <meta property="og:description" content={pkg.appMetaDescription} />
-        <meta property="og:image" content={`${HOST}/opengraph.jpg`} />
+        <meta property="og:image" content={`${HOST}/cover.jpg`} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>

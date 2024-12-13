@@ -2,6 +2,8 @@
 
 Turn your intention into a powerful sigil at [sigilforge.vectris.dev](https://sigilforge.vectris.dev)
 
+![Sigil Forge](./public/cover.jpg)
+
 ## How it works
 
 This app is powered by:
