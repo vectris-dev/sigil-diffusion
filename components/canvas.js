@@ -17,8 +17,8 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
   useEffect(() => {
     // Process the intention text
     const processText = () => {
-      const text = intention.toLowerCase();
-      const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+      const text = intention.toUpperCase();
+      const vowels = new Set(['A', 'E', 'I', 'O', 'U']);
       const seen = new Set();
       const removed = [];
       
