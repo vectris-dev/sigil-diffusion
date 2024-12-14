@@ -25,7 +25,7 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
       const processed = text
         .split("")
         .filter((char, index) => {
-          if (vowels.has(char) || seen.has(char)) {
+          if (vowels.has(char) || seen.has(char) || !/^[A-Z0-9]$/i.test(char)) {
             removed.push(index);
             return false;
           }
