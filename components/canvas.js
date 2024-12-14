@@ -117,7 +117,7 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
               {drawingExists || (
                 <div>
                   <div className="absolute grid w-full h-full p-3 place-items-center pointer-events-none text-xl">
-                    <span className="opacity-40 text-background-dark">Now, draw your sigil using the letters above</span>
+                    <span className="opacity-40 text-background-dark">Now, draw your sigil using the remaining letters</span>
                   </div>
                 </div>
               )}
