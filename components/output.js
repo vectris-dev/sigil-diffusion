@@ -102,10 +102,10 @@ export default function Output({ prediction, onReset }) {
               </svg>
               {showInput ? "View Output" : "View Input"}
             </button>
+
+            <PrimaryButton onClick={onReset}>Create a new sigil</PrimaryButton>
           </>
         )}
-
-        <PrimaryButton onClick={onReset}>Create a new sigil</PrimaryButton>
       </div>
     </div>
   );

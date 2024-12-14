@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-background-light dark:bg-background-dark text-primary-light dark:text-primary-dark;
+  @apply bg-white dark:bg-black text-black dark:text-white;
 }
 
 input {
