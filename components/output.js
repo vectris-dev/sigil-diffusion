@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { extractIntention } from "lib/intention";
 import copy from "copy-to-clipboard";
-import { Copy as CopyIcon, PlusCircle as PlusCircleIcon } from "lucide-react";
+import { Copy as CopyIcon } from "lucide-react";
+import PrimaryButton from "./primary-button";
 
 export default function Output({ prediction, onReset }) {
   const [linkCopied, setLinkCopied] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   const copyLink = () => {
     const url = window.location.origin + "/sigils/" + (prediction.uuid || prediction.id);
@@ -45,8 +47,12 @@ export default function Output({ prediction, onReset }) {
       <div className="my-5 p-5 flex justify-center">
         {/* Make container responsive with smaller width on mobile */}
         <div className="relative w-[280px] sm:w-[512px] aspect-square">
-          {prediction?.status === "succeeded" && prediction.output?.length ? (
-            <img src={prediction.output[prediction.output.length - 1]} alt="output image" className="absolute inset-0 w-full h-full object-contain rounded-lg" />
+          {prediction?.status === "succeeded" && (prediction.output?.length || prediction.input?.image) ? (
+            <img 
+              src={showInput ? prediction.input.image : prediction.output[prediction.output.length - 1]} 
+              alt={showInput ? "input image" : "output image"} 
+              className="absolute inset-0 w-full h-full object-contain rounded-lg" 
+            />
           ) : (
             <div className="absolute inset-0 w-full h-full rounded-lg bg-gray-200 animate-pulse flex items-center justify-center">
               <svg className="w-8 sm:w-12 h-8 sm:h-12 text-gray-300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512">
@@ -83,13 +89,23 @@ export default function Output({ prediction, onReset }) {
               </svg>
               Download
             </button>
+
+            <button className="lil-button" onClick={() => setShowInput(!showInput)}>
+              <svg className="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path 
+                  d="M21 12l-7-7v4C7 9 3 14 3 21c2.5-3.5 6-5.1 11-5.1V20l7-8z" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {showInput ? "View Output" : "View Input"}
+            </button>
           </>
         )}
 
-        <button className="lil-button" onClick={onReset}>
-          <PlusCircleIcon className="icon" />
-          Create a new sigil
-        </button>
+        <PrimaryButton onClick={onReset}>Create a new sigil</PrimaryButton>
       </div>
     </div>
   );

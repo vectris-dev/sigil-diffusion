@@ -118,7 +118,7 @@ export default function Home() {
           <main className="container mx-auto p-5 flex flex-col items-center justify-center">
             {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onSubmit={handleIntentionComplete}/>}
             {currentState === States.CANVAS && <Canvas intention={intention} setProcessedIntention={setProcessedIntention} setDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
-            {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} />}
+            {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} redirect={false} />}
             {currentState === States.ERROR && <Error error={error} onReset={restart} />}
           </main>
         </div>

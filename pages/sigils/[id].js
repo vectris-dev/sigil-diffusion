@@ -2,9 +2,12 @@ import Output from "components/output";
 import Head from "next/head";
 import pkg from "../../package.json";
 import { extractIntention } from "lib/intention";
+import { useRouter } from "next/router";
+
 export default function Sigil({ prediction, baseUrl }) {
+  const router = useRouter();
   return (
-    <div>
+    <div className="min-h-screen bg-white dark:bg-black">
       <Head>
         <title>
           {prediction && `${extractIntention(prediction.input.prompt)} - `}
@@ -18,8 +21,8 @@ export default function Sigil({ prediction, baseUrl }) {
           content={`${baseUrl}/api/og?id=${prediction.id}`}
         />
       </Head>
-      <main className="container max-w-[1024px] mx-auto p-5">
-        <Output prediction={prediction} />
+      <main className="container max-w-[1024px] mx-auto p-5 flex justify-center items-center min-h-screen">
+        <Output prediction={prediction} onReset={() => router.push("/")} />
       </main>
     </div>
   );
