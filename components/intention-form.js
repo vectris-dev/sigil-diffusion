@@ -2,6 +2,10 @@
 
 import PrimaryButton from "./primary-button";
 export default function IntentionForm({ intention, setIntention, onSubmit }) {
+  const hasNonVowel = (text) => {
+    return /[^aeiou\s]/i.test(text);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit();
@@ -23,7 +27,12 @@ export default function IntentionForm({ intention, setIntention, onSubmit }) {
           autoCapitalize="off"
           spellCheck="false"
         />
-        <PrimaryButton type="submit">Prepare</PrimaryButton>
+        <PrimaryButton 
+          type="submit" 
+          disabled={!intention.trim() || !hasNonVowel(intention)}
+        >
+          Prepare
+        </PrimaryButton>
       </form>
     </div>
   );
