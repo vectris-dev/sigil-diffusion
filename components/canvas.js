@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
-import PrimaryButton from "./PrimaryButton";
+import PrimaryButton from "./primary-button";
 import { Undo as UndoIcon, Trash as TrashIcon } from "lucide-react";
 
 export default function Canvas({ onDrawing, onSubmit }) {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Loader from "components/loader";
 import { extractIntention } from "lib/intention";
 import copy from "copy-to-clipboard";

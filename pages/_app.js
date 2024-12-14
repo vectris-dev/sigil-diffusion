@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { DarkModeToggle } from "../components/DarkModeToggle";
+import { DarkModeToggle } from "../components/dark-mode-toggle";
 
 function MyApp({ Component, pageProps }) {
   return (

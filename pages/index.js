@@ -114,8 +114,8 @@ export default function Home() {
       </Head>
 
       <div className={`min-h-screen bg-white dark:bg-black text-black dark:text-white relative transition-opacity duration-500 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
-        <div className="w-full mx-auto">
-          <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
+        <div className="w-full mx-auto flex items-center justify-center min-h-screen">
+          <main className="container mx-auto p-5 flex flex-col items-center justify-center">
             {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={handleIntentionComplete} />}
             {currentState === States.CANVAS && <Canvas onDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
             {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} />}
