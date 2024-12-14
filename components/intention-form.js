@@ -19,7 +19,7 @@ export default function IntentionForm({ intention, setIntention, onSubmit }) {
           type="text"
           value={intention}
           onChange={(e) => setIntention(e.target.value)}
-          placeholder="Enter your intention"
+          placeholder="I create great memes"
           className="w-full px-4 py-2 text-lg rounded-md focus:outline-none focus:ring-2"
           autoFocus
           autoComplete="off"
