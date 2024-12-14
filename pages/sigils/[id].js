@@ -1,4 +1,4 @@
-import { Prediction } from "components/predictions";
+import Output from "components/output";
 import Head from "next/head";
 import pkg from "../../package.json";
 import { extractIntention } from "lib/intention";
@@ -19,7 +19,7 @@ export default function Sigil({ prediction, baseUrl }) {
         />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5">
-        <Prediction prediction={prediction} showLinkToNewSigil={true} />
+        <Output prediction={prediction} />
       </main>
     </div>
   );

@@ -1,26 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useProcessText } from "./useProcessText";
-import { AnimatedLetter } from "./animated-letter";
 import PrimaryButton from "./primary-button";
-
-export default function IntentionForm({ intention, setIntention, onIntentionProcessed }) {
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [showOutput, setShowOutput] = useState(false);
-  const { processedText, removedIndices } = useProcessText(intention);
-
+export default function IntentionForm({ intention, setIntention, onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmedIntention = intention.trim();
-    setIntention(trimmedIntention);
-    setIsAnimating(true);
-    setShowOutput(true);
-    setTimeout(() => {
-      onIntentionProcessed(true);
-      setIsAnimating(false);
-    }, trimmedIntention.length * 100 + 1000);
+    onSubmit();
   };
 
   return (
@@ -41,19 +25,6 @@ export default function IntentionForm({ intention, setIntention, onIntentionProc
         />
         <PrimaryButton type="submit">Prepare</PrimaryButton>
       </form>
-      <AnimatePresence>
-        {showOutput && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-4xl min-h-[100px] flex items-center justify-center">
-            {isAnimating ? (
-              intention.split("").map((letter, index) => <AnimatedLetter key={index} letter={letter} isRemoved={removedIndices.includes(index)} delay={index * 0.1} />)
-            ) : (
-              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                {processedText}
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

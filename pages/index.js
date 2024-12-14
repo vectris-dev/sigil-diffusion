@@ -17,7 +17,7 @@ const States = {
   ERROR: "ERROR",
 };
 
-const debug = true;
+const debug = false;
 
 export default function Home() {
   const [currentState, setCurrentState] = useState(States.INTENTION);
@@ -116,8 +116,8 @@ export default function Home() {
       <div className={`min-h-screen bg-white dark:bg-black text-black dark:text-white relative transition-opacity duration-500 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
         <div className="w-full mx-auto flex items-center justify-center min-h-screen">
           <main className="container mx-auto p-5 flex flex-col items-center justify-center">
-            {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={handleIntentionComplete} />}
-            {currentState === States.CANVAS && <Canvas onDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
+            {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onSubmit={handleIntentionComplete}/>}
+            {currentState === States.CANVAS && <Canvas intention={intention} setProcessedIntention={setProcessedIntention} setDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
             {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} />}
             {currentState === States.ERROR && <Error error={error} onReset={restart} />}
           </main>
