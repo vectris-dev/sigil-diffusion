@@ -10,64 +10,95 @@ import IntentionForm from "components/intention-form";
 
 const HOST = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
+const States = {
+  INTENTION: "INTENTION",
+  CANVAS: "CANVAS",
+  OUTPUT: "OUTPUT",
+  ERROR: "ERROR",
+};
+
 const debug = true;
 
 export default function Home() {
+  const [currentState, setCurrentState] = useState(States.INTENTION);
   const [intention, setIntention] = useState("");
   const [processedIntention, setProcessedIntention] = useState("");
   const [drawing, setDrawing] = useState(null);
   const [output, setOutput] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
-
+  const [isTransitioning, setIsTransitioning] = useState(false);
   useEffect(() => {
     if (debug) {
       setIntention("I am focused and productive");
     }
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleIntentionComplete = () => {
+    transitionTo(States.CANVAS);
+  };
+
+  const handleCanvasComplete = async (e) => {
     e.preventDefault();
+    transitionTo(States.OUTPUT);
 
     let prompt = `A glowing, mystical sigil with intricate patterns, radiating magical energy, symbolizing the intention: "${intention}". The sigil is surrounded by an aura of light, with ethereal and otherworldly effects, evoking a sense of immense power and focus.`;
 
-    setError(null);
-    setIsProcessing(true);
+    try {
+      const fileUrl = await uploadFile(drawing);
 
-    const fileUrl = await uploadFile(drawing);
+      const body = {
+        prompt,
+        image: fileUrl,
+        structure: "scribble",
+      };
 
-    const body = {
-      prompt,
-      image: fileUrl,
-      structure: "scribble",
-    };
+      const response = await fetch("/api/predictions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
-    const response = await fetch("/api/predictions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    let prediction = await response.json();
-    setOutput(prediction);
-    if (response.status !== 201) {
-      setError(prediction.detail);
-      return;
-    }
-
-    while (prediction.status !== "succeeded" && prediction.status !== "failed") {
-      await sleep(500);
-      const response = await fetch("/api/predictions/" + prediction.id);
-      prediction = await response.json();
+      let prediction = await response.json();
       setOutput(prediction);
-      if (response.status !== 200) {
+
+      if (response.status !== 201) {
         setError(prediction.detail);
+        transitionTo(States.ERROR);
         return;
       }
-    }
 
-    setIsProcessing(false);
+      while (prediction.status !== "succeeded" && prediction.status !== "failed") {
+        await sleep(500);
+        const response = await fetch("/api/predictions/" + prediction.id);
+        prediction = await response.json();
+        setOutput(prediction);
+        if (response.status !== 200) {
+          setError(prediction.detail);
+          transitionTo(States.ERROR);
+          return;
+        }
+      }
+    } catch (err) {
+      setError(err.message);
+      transitionTo(States.ERROR);
+    }
+  };
+
+  const restart = () => {
+    transitionTo(States.INTENTION);
+    setDrawing(null);
+    setOutput(null);
+    setError(null);
+  };
+
+  const transitionTo = (state) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentState(state);
+      setIsTransitioning(false);
+    }, 300);
   };
 
   return (
@@ -81,12 +112,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
-      <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
-        <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={setProcessedIntention} />
-        <Canvas onDrawing={setDrawing} onSubmit={handleSubmit} />
-        <Error error={error} />
-        <Output output={output} />
-      </main>
+
+      <div className={`min-h-screen bg-white dark:bg-black text-black dark:text-white relative transition-opacity duration-500 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
+        <div className="w-full mx-auto">
+          <main className="container max-w-[1024px] mx-auto p-5 min-h-screen">
+            {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onIntentionProcessed={handleIntentionComplete} />}
+            {currentState === States.CANVAS && <Canvas onDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
+            {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} />}
+            {currentState === States.ERROR && <Error error={error} onReset={restart} />}
+          </main>
+        </div>
+      </div>
     </>
   );
 }

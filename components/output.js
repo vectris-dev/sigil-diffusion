@@ -5,7 +5,7 @@ import { extractIntention } from "lib/intention";
 import copy from "copy-to-clipboard";
 import { Copy as CopyIcon, PlusCircle as PlusCircleIcon } from "lucide-react";
 
-export default function Output({ prediction }) {
+export default function Output({ prediction, onReset }) {
   const [linkCopied, setLinkCopied] = useState(false);
 
   const copyLink = () => {
@@ -79,12 +79,10 @@ export default function Output({ prediction }) {
           Download
         </button>
 
-        <Link href="/">
-          <button className="lil-button" onClick={copyLink}>
-            <PlusCircleIcon className="icon" />
-            Create a new sigil
-          </button>
-        </Link>
+        <button className="lil-button" onClick={onReset}>
+          <PlusCircleIcon className="icon" />
+          Create a new sigil
+        </button>
       </div>
     </div>
   );
