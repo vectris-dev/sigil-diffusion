@@ -87,18 +87,22 @@ export default function Home() {
   };
 
   const restart = () => {
-    transitionTo(States.INTENTION);
-    setDrawing(null);
-    setOutput(null);
-    setError(null);
+    transitionTo(States.INTENTION, () => {
+      setDrawing(null);
+      setOutput(null);
+      setError(null);
+    });
   };
 
-  const transitionTo = (state) => {
+  const transitionTo = (state, callback) => {
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentState(state);
       setIsTransitioning(false);
-    }, 300);
+      if (callback) {
+        callback();
+      }
+    }, 500);
   };
 
   return (
@@ -116,7 +120,7 @@ export default function Home() {
       <div className={`min-h-screen bg-white dark:bg-black text-black dark:text-white relative transition-opacity duration-500 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
         <div className="w-full mx-auto flex items-center justify-center min-h-screen">
           <main className="container mx-auto p-5 flex flex-col items-center justify-center">
-            {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onSubmit={handleIntentionComplete}/>}
+            {currentState === States.INTENTION && <IntentionForm intention={intention} setIntention={setIntention} onSubmit={handleIntentionComplete} />}
             {currentState === States.CANVAS && <Canvas intention={intention} setProcessedIntention={setProcessedIntention} setDrawing={setDrawing} onSubmit={handleCanvasComplete} />}
             {currentState === States.OUTPUT && <Output prediction={output} onReset={restart} redirect={false} />}
             {currentState === States.ERROR && <Error error={error} onReset={restart} />}
