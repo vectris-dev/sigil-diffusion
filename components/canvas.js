@@ -18,18 +18,21 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
     // Process the intention text
     const processText = () => {
       const text = intention.toUpperCase();
-      const vowels = new Set(['A', 'E', 'I', 'O', 'U']);
+      const vowels = new Set(["A", "E", "I", "O", "U"]);
       const seen = new Set();
       const removed = [];
-      
-      const processed = text.split('').filter((char, index) => {
-        if (vowels.has(char) || seen.has(char)) {
-          removed.push(index);
-          return false;
-        }
-        seen.add(char);
-        return true;
-      }).join('');
+
+      const processed = text
+        .split("")
+        .filter((char, index) => {
+          if (vowels.has(char) || seen.has(char)) {
+            removed.push(index);
+            return false;
+          }
+          seen.add(char);
+          return true;
+        })
+        .join("");
 
       setProcessedText(processed);
       setProcessedIntention(processed);
@@ -40,20 +43,20 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
     const animationSequence = async () => {
       // Show initial intention
       setIsAnimating(true);
-      
+
       // Wait before starting removal animation
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Process text and animate removals
       processText();
-      
+
       // Wait for removal animation to complete
-      await new Promise(resolve => setTimeout(resolve, intention.length * 100 + 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, intention.length * 100 + 500));
+
       setIsAnimating(false);
-      
+
       // Wait before showing canvas
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setShowCanvas(true);
     };
 
@@ -96,27 +99,12 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
   // };
 
   return (
-    <div className="relative flex flex-col items-center">
-      <motion.div 
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 1, y: showCanvas ? -20 : 0 }}
-        className="text-4xl min-h-[100px] flex items-center justify-center"
-      >
+    <div className="relative flex flex-col items-center w-full">
+      <motion.div initial={{ opacity: 1 }} animate={{ opacity: 1, y: showCanvas ? -20 : 0 }} className="text-4xl min-h-[100px] flex items-center justify-center">
         {isAnimating ? (
-          intention.split("").map((letter, index) => (
-            <AnimatedLetter
-              key={index}
-              letter={letter}
-              isRemoved={removedIndices.includes(index)}
-              delay={index * 0.1}
-            />
-          ))
+          intention.split("").map((letter, index) => <AnimatedLetter key={index} letter={letter} isRemoved={removedIndices.includes(index)} delay={index * 0.1} />)
         ) : (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {processedText}
           </motion.div>
         )}
@@ -124,11 +112,7 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
 
       <AnimatePresence>
         {showCanvas && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="w-full"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
             <div className="relative">
               {drawingExists || (
                 <div>
@@ -138,10 +122,17 @@ export default function Canvas({ intention, setProcessedIntention, setDrawing, o
                 </div>
               )}
 
-              <ReactSketchCanvas ref={canvasRef} className="w-full aspect-square border-none cursor-crosshair" strokeWidth={4} strokeColor="black" onChange={onChange} withTimestamp={true} />
+              <ReactSketchCanvas
+                ref={canvasRef}
+                className="w-full max-w-[512px] mx-auto aspect-square border-none cursor-crosshair"
+                strokeWidth={4}
+                strokeColor="black"
+                onChange={onChange}
+                withTimestamp={true}
+              />
 
               {drawingExists && (
-                <div className="animate-in fade-in duration-700 text-left">
+                <div className="animate-in fade-in duration-700 text-left mt-4 flex justify-center gap-4">
                   <button className="lil-button" onClick={undo}>
                     <UndoIcon className="icon" />
                     Undo
