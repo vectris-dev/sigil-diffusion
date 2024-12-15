@@ -19,7 +19,7 @@ export function InfoModal({ isOpen, onClose }) {
             SigilForge is a tool that helps you create and charge magical sigils. Enter your intention, and the app will help you transform it into a unique sigil by removing vowels and repeated letters. Draw your sigil using the remaining letters, and watch as AI transforms it into a mystically charged version.
           </p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-6">What's a Sigil?</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-6">What&apos;s a Sigil?</h2>
           <p>
             Sigils are symbols created for a specific magical purpose. Their use dates back to medieval grimoires and occult practices, but they were popularized in their modern form by Austin Osman Spare in the early 20th century. Spare developed a method of creating sigils by writing out an intention, removing repeated letters and vowels, and combining the remaining letters into a symbolic design.
           </p>
