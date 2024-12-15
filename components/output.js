@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { extractIntention } from "lib/intention";
 import copy from "copy-to-clipboard";
-import { Copy as CopyIcon } from "lucide-react";
+import { Copy as CopyIcon, Eye as EyeIcon } from "lucide-react";
 import PrimaryButton from "./primary-button";
 
 export default function Output({ prediction, onReset }) {
@@ -48,10 +48,10 @@ export default function Output({ prediction, onReset }) {
         {/* Make container responsive with smaller width on mobile */}
         <div className="relative w-[280px] sm:w-[512px] aspect-square">
           {prediction?.status === "succeeded" && (prediction.output?.length || prediction.input?.image) ? (
-            <img 
-              src={showInput ? prediction.input.image : prediction.output[prediction.output.length - 1]} 
-              alt={showInput ? "input image" : "output image"} 
-              className="absolute inset-0 w-full h-full object-contain rounded-lg" 
+            <img
+              src={showInput ? prediction.input.image : prediction.output[prediction.output.length - 1]}
+              alt={showInput ? "input image" : "output image"}
+              className="absolute inset-0 w-full h-full object-contain rounded-lg"
             />
           ) : (
             <div className="absolute inset-0 w-full h-full rounded-lg bg-gray-200 animate-pulse flex items-center justify-center">
@@ -70,6 +70,11 @@ export default function Output({ prediction, onReset }) {
       <div className="text-center py-2">
         {prediction?.status === "succeeded" && (
           <>
+            <button className="lil-button" onClick={() => setShowInput(!showInput)}>
+              <EyeIcon className="icon" />
+              {showInput ? "View Output" : "View Input"}
+            </button>
+
             <button className="lil-button" onClick={copyLink}>
               <CopyIcon className="icon" />
               {linkCopied ? "Copied!" : "Copy link"}
@@ -89,20 +94,6 @@ export default function Output({ prediction, onReset }) {
               </svg>
               Download
             </button>
-
-            <button className="lil-button" onClick={() => setShowInput(!showInput)}>
-              <svg className="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path 
-                  d="M21 12l-7-7v4C7 9 3 14 3 21c2.5-3.5 6-5.1 11-5.1V20l7-8z" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
-              {showInput ? "View Output" : "View Input"}
-            </button>
-
             <PrimaryButton onClick={onReset}>Create a new sigil</PrimaryButton>
           </>
         )}
