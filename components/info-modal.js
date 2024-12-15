@@ -37,7 +37,7 @@ export function InfoModal({ isOpen, onClose }) {
             This project is an experiment in human-machine collaboration for magical practices. By combining traditional sigil creation methods with artificial intelligence, we're exploring how modern technology can enhance ancient magical techniques.
           </p>
           <p>
-            The AI's interpretation of your sigil draws upon the collective visual language of the internet, infusing your personal intention with the aggregate energy of millions of images and symbols. This creates a unique synthesis of individual will and collective consciousness, potentially amplifying the sigil's power through technological means.
+            The AI&apos;s interpretation of your sigil draws upon the collective visual language of the internet, infusing your personal intention with the aggregate energy of millions of images and symbols. This creates a unique synthesis of individual will and collective consciousness, potentially amplifying the sigil&apos;s power through technological means.
           </p>
         </div>
       </div>
