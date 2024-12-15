@@ -31,7 +31,7 @@ export default function IntentionForm({ intention, setIntention, onSubmit }) {
           type="submit" 
           disabled={!intention.trim() || !hasNonVowel(intention)}
         >
-          Prepare
+          Process
         </PrimaryButton>
       </form>
     </div>

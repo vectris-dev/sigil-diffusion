@@ -13,32 +13,32 @@ export function InfoModal({ isOpen, onClose }) {
           <X size={24} />
         </button>
         
-        <div className="max-w-3xl mx-auto mt-16">
-          <h1 className="text-4xl font-bold mb-8">About Sigil Forge</h1>
-          
-          <div className="prose dark:prose-invert">
-            <p>
-              SigilForge is a tool that helps you create and charge magical sigils. Enter your intention, 
-              and the app will help you transform it into a unique sigil by removing vowels and repeated letters.
-            </p>
-            
-            <h2>How it works</h2>
-            <p>
-              1. Enter your intention in plain language<br />
-              2. The app will process your text, removing vowels and duplicate letters<br />
-              3. Draw your sigil using the remaining letters<br />
-              4. The AI will transform your drawing into a mystical, charged version
-            </p>
+        <div className="max-w-3xl mx-auto mt-16 prose">
+          <h2 className="text-2xl font-bold mb-6">What is this thing?</h2>
+          <p>
+            SigilForge is a tool that helps you create and charge magical sigils. Enter your intention, and the app will help you transform it into a unique sigil by removing vowels and repeated letters. Draw your sigil using the remaining letters, and watch as AI transforms it into a mystically charged version.
+          </p>
 
-            <h2>Technology</h2>
-            <p>This app is powered by:</p>
-            <ul>
-              <li>Replicate - for running machine learning models</li>
-              <li>ControlNet - for generating images from text and scribbles</li>
-              <li>Next.js - for the web application framework</li>
-              <li>Tailwind CSS - for styling</li>
-            </ul>
-          </div>
+          <h2 className="text-2xl font-bold mt-8 mb-6">What's a Sigil?</h2>
+          <p>
+            Sigils are symbols created for a specific magical purpose. Their use dates back to medieval grimoires and occult practices, but they were popularized in their modern form by Austin Osman Spare in the early 20th century. Spare developed a method of creating sigils by writing out an intention, removing repeated letters and vowels, and combining the remaining letters into a symbolic design.
+          </p>
+          <p>
+            The process of creating a sigil is believed to help program your subconscious mind with your intention, while the act of charging it (traditionally through meditation, ritual, or other means) is thought to activate its magical properties.
+          </p>
+
+          <h2 className="text-2xl font-bold mt-8 mb-6">Who made this?</h2>
+          <p>
+            SigilForge was created by <a href="https://vectr.is/" target="_blank" rel="noopener noreferrer">Vectris</a>
+          </p>
+
+          <h2 className="text-2xl font-bold mt-8 mb-6">Why make this?</h2>
+          <p>
+            This project is an experiment in human-machine collaboration for magical practices. By combining traditional sigil creation methods with artificial intelligence, we're exploring how modern technology can enhance ancient magical techniques.
+          </p>
+          <p>
+            The AI's interpretation of your sigil draws upon the collective visual language of the internet, infusing your personal intention with the aggregate energy of millions of images and symbols. This creates a unique synthesis of individual will and collective consciousness, potentially amplifying the sigil's power through technological means.
+          </p>
         </div>
       </div>
     </div>
