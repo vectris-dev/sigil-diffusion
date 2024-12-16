@@ -29,7 +29,7 @@ export function InfoModal({ isOpen, onClose }) {
 
           <h2 className="text-2xl font-bold mt-8 mb-6">Who made this?</h2>
           <p>
-            SigilForge was created by <a href="https://vectr.is/" target="_blank" rel="noopener noreferrer">Vectris</a>
+            SigilForge was created by <a href="https://links.vectr.is/" target="_blank" rel="noopener noreferrer">Vectris</a>
           </p>
 
           <h2 className="text-2xl font-bold mt-8 mb-6">Why make this?</h2>
